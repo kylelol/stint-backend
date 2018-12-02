@@ -19,6 +19,7 @@ defmodule StintWeb.Router do
     pipe_through :require_auth
 
     post "/time_entries", TimeEntryController, :start
+    put "/time_entries/:id", TimeEntryController, :stop
 
     get "/test", TestController, :index
   end

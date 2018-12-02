@@ -15,4 +15,8 @@ defmodule Toggl.TimeEntries do
     post("time_entries", client, body)
   end
 
+  def stop(client, time_entry_id) do
+    put("time_entries/#{time_entry_id}/stop", client)
+  end
+
 end

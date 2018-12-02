@@ -13,6 +13,12 @@ defmodule Toggl do
     _request(:post, initial_url, client.auth, body)
   end
 
+  def put(path, client, body \\ "") do
+    initial_url = url(client, path)
+    IO.puts initial_url
+    _request(:put, initial_url, client.auth, body)
+  end
+
   def process_response_body(body) do
     body
     |> Poison.decode!

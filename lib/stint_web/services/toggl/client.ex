@@ -5,4 +5,8 @@ defmodule Toggl.Client do
     %__MODULE__{auth: auth, endpoint: "https://www.toggl.com/api/v9"}
   end
 
+  def new(auth, :v8) do
+    %__MODULE__{auth: auth, endpoint: "https://www.toggl.com/api/v8"}
+  end
+
 end
