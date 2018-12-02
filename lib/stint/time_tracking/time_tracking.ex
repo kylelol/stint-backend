@@ -16,7 +16,7 @@ defmodule Stint.TimeTracking do
   end
 
   defp create_client(user) do
-    Toggl.Client.new(%{toggl_api_key: user.toggl_api_token}, :api)
+    Toggl.Client.new(%{toggl_api_key: user.toggl_api_token}, :v9)
   end
 
   defp create_v8_client(user) do

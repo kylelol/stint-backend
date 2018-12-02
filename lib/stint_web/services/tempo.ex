@@ -1,4 +1,4 @@
-defmodule Toggl do
+defmodule Tempo do
   use HTTPoison.Base
 
   @user_agent []
@@ -40,25 +40,12 @@ defmodule Toggl do
     end
   end
 
-  def authorization_header(%{toggl_api_key: toggl_api_key}, headers) do
-    encoded = Base.encode64("#{toggl_api_key}:api_token")
-    headers ++ [{"Authorization", "Basic #{encoded}"}]
+  def authorization_header(%{tempo_api_key: tempo_api_key}, headers) do
+    headers ++ [{"Authorization", "Bearer #{tempo_api_key}"}]
   end
-
-  defp add_params_to_url(url, params) do
-    <<url :: binary, build_qs(params) :: binary>>
-  end
-
-  defp build_qs([]), do: ""
-  defp build_qs(kvs), do: to_string('?' ++ URI.encode_query(kvs))
 
   def url(%{endpoint: endpoint}, path) do
     endpoint <> "/" <> path
   end
 
-  defp is_json_response(response) do
-    Enum.find(response.headers, fn(x) -> elem(x, 0) == "Content-Type" end)
-    |> elem(1)
-    |> String.contains?("application/json")
-  end
 end
