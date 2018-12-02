@@ -5,11 +5,18 @@ defmodule Toggl do
 
   def get(path, client) do
     initial_url = url(client, path)
-    _request(:get, initial_url, client.auth)
+    _request(:get, initial_url, client.auth).body
   end
 
-  def process_response(response) do
-    Poison.decode!(response.body, keys: :atoms)
+  def post(path, client, body \\ "") do
+    initial_url = url(client, path)
+    _request(:post, initial_url, client.auth, body)
+  end
+
+  def process_response_body(body) do
+    body
+    |> Poison.decode!
+    |> Enum.map(fn({k, v}) -> {String.to_atom(k), v} end)
   end
 
   def _request(method, url, auth, body \\ "") do
@@ -22,6 +29,7 @@ defmodule Toggl do
         request!(method, url, "", headers, options)
         |> process_response
       _ ->
+        IO.puts "encoding body"
         request!(method, url, Poison.encode!(body), headers, options)
         |> process_response
     end
@@ -39,7 +47,7 @@ defmodule Toggl do
   defp build_qs([]), do: ""
   defp build_qs(kvs), do: to_string('?' ++ URI.encode_query(kvs))
 
-  defp url(%{endpoint: endpoint}, path) do
+  def url(%{endpoint: endpoint}, path) do
     endpoint <> "/" <> path
   end
 
