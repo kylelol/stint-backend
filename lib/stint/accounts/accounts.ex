@@ -20,7 +20,7 @@ defmodule Stint.Accounts do
 
   def create_user(attrs \\ %{}) do
     %User{}
-    |> User.changeset(attrs)
+    |> User.tempo_changeset(attrs)
     |> Repo.insert()
   end
 
