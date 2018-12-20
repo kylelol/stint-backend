@@ -41,7 +41,8 @@ defmodule Stint.Mixfile do
       {:cowboy, "~> 1.0"},
       {:plug_cowboy, "~> 1.0"},
       {:poison, "~> 3.1"},
-      {:httpoison, "~> 1.4"}
+      {:httpoison, "~> 1.4"},
+      {:cors_plug, "~> 2.0"},
     ]
   end
 

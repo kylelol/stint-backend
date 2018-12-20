@@ -35,6 +35,8 @@ defmodule StintWeb.Endpoint do
     key: "_stint_key",
     signing_salt: "OPhjsWO9"
 
+ plug CORSPlug, origin: "*"
+
   plug StintWeb.Router
 
   @doc """

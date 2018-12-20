@@ -12,6 +12,8 @@ defmodule StintWeb.Router do
   scope "/api", StintWeb do
     pipe_through :api
 
+    get "/test", TimeEntryController, :test
+
     scope "/auth", Auth do
       post "/registration", RegistrationController, :create
     end

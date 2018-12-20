@@ -9,4 +9,8 @@ defmodule StintWeb.TimeEntryView do
     %{success: true}
   end
 
+  def render("test.json", _opts) do
+    %{success: true}
+  end
+
 end

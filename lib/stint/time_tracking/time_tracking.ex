@@ -1,6 +1,7 @@
 defmodule Stint.TimeTracking do
 
   def start_time_entry(user, description \\ "") do
+    IO.puts "IN here"
     response = user
       |> create_client
       |> Toggl.TimeEntries.start(%{description: description})
@@ -12,7 +13,7 @@ defmodule Stint.TimeTracking do
       |> create_v8_client
       |> Toggl.TimeEntries.stop(id)
 
-    data = response.body[:data]
+      data = response.body[:data]
     duration = data["duration"]
     description = data["description"]
     start_date = data["start"]
